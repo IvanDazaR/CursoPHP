@@ -3,7 +3,7 @@
 require_once 'vendor/autoload.php';
 
 use Illuminate\Database\Capsule\Manager as Capsule;
-use App\Models\Job;
+use App\Models\Project;
 
 $capsule = new Capsule;
 
@@ -25,10 +25,10 @@ $capsule->bootEloquent();
 
     if (!empty($_POST)) {
         # code...
-        $job = new Job(); 
-        $job->title = $_POST['title'];
-        $job->description= $_POST['description'];
-        $job->save();
+        $project = new Project(); 
+        $project->title = $_POST['title'];
+        $project->description= $_POST['description'];
+        $project->save();
     }
 ?>
 
@@ -38,7 +38,7 @@ $capsule->bootEloquent();
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Add Job</title>
+    <title>Add Projects</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
     <script src="main.js"></script>
@@ -47,8 +47,8 @@ $capsule->bootEloquent();
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Add Job</h1>
-    <form action="addJob.php" method="post">
+    <h1>Add Projects</h1>
+    <form action="addProject.php" method="post">
         <label for="">Title:</label>
         <input type="text" name="title"><br>
         <label for="">Description:</label>

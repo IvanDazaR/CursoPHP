@@ -3,7 +3,7 @@
 require_once 'vendor/autoload.php';
 
 use Illuminate\Database\Capsule\Manager as Capsule;
-use App\Models\Job;
+use App\Models\{Job, Project};
 
 $capsule = new Capsule;
 
