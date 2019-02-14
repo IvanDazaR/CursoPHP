@@ -33,6 +33,7 @@ class ComposerStaticInitcdef8b20920458419a9f8e4023b3d8df
         'P' => 
         array (
             'Psr\\SimpleCache\\' => 16,
+            'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
         ),
@@ -49,6 +50,7 @@ class ComposerStaticInitcdef8b20920458419a9f8e4023b3d8df
         ),
         'A' => 
         array (
+            'Aura\\Router\\' => 12,
             'App\\' => 4,
         ),
     );
@@ -73,6 +75,10 @@ class ComposerStaticInitcdef8b20920458419a9f8e4023b3d8df
         'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
         'Psr\\Http\\Message\\' => 
         array (
@@ -102,6 +108,10 @@ class ComposerStaticInitcdef8b20920458419a9f8e4023b3d8df
         'Doctrine\\Common\\Inflector\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
+        ),
+        'Aura\\Router\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/aura/router/src',
         ),
         'App\\' => 
         array (
