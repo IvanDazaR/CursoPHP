@@ -26,13 +26,22 @@ $capsule->setAsGlobal();
 // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
 $capsule->bootEloquent();
 
+$request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
+    $_SERVER,
+    $_GET,
+    $_POST,
+    $_COOKIE,
+    $_FILES
+);
 
-$route = $_GET['route'] ?? '/';
+var_dump($request->getUri()->getPath());
 
-if ($route == '/') {
-    # code...
-    require '../index.php';
-} elseif ($route == 'addJob') {
-    # code...
-    require '../addJob.php';
-}
+// $route = $_GET['route'] ?? '/';
+
+// if ($route == '/') {
+//     # code...
+//     require '../index.php';
+// } elseif ($route == 'addJob') {
+//     # code...
+//     require '../addJob.php';
+// }
