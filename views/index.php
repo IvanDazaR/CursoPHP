@@ -1,22 +1,3 @@
-<?php
-
-
-// if (!empty($_POST)) {
-  //     # code...
-  //     $job = new Job(); 
-  //     $job->title = $_POST['title'];
-  //     $job->description= $_POST['description'];
-  //     $job->save();
-  // }
-  
-  use App\Models\{Job, Project};
-require_once('jobs.php');
-
-$name = 'Ivan Daza';
-$limitMonths = 2000;
-
-?>
-
 <!doctype html>
 <html lang="en">
 
