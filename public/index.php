@@ -35,8 +35,8 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
     $_FILES
 );
 $routerContainer = new RouterContainer();
-
 $map = $routerContainer->getMap();
+
 $map->get('index', '/cursoPHP/', [
     'controller' => 'App\Controllers\IndexController',
     'action' => 'indexAction'
@@ -45,7 +45,22 @@ $map->get('addJobs', '/cursoPHP/jobs/add', [
     'controller' => 'App\Controllers\JobsController',
     'action' => 'getAddJobAction'
 ]);
-$map->get('addProjectss', '/cursoPHP/projects/add', '../addProject.php');
+$map->post('saveJobs', '/cursoPHP/jobs/add', [
+    'controller' => 'App\Controllers\JobsController',
+    'action' => 'getAddJobAction'
+]);
+
+$map->get('addProjects', '/cursoPHP/projects/add', [
+    'controller' => 'App\Controllers\ProjectsController',
+    'action' => 'getAddProjectAction'
+]);
+$map->post('saveProjects', '/cursoPHP/projects/add', [
+    'controller' => 'App\Controllers\ProjectsController',
+    'action' => 'getAddProjectAction'
+]);
+// $map->get('addProjects', '/cursoPHP/projects/add', '../addProject.php');
+$matcher = $routerContainer->getMatcher();
+$route = $matcher->match($request);
 
 function printElement($job) {
     // if($job->visible == false) {
@@ -65,8 +80,7 @@ function printElement($job) {
     echo '</li>';
   }
 
-$matcher = $routerContainer->getMatcher();
-$route = $matcher->match($request);
+
 if (!$route) {
     # code...
     echo 'No route';
@@ -77,7 +91,7 @@ if (!$route) {
     $actionName = $handlerData['action'];
 
     $controller = new $controllerName;
-    $controller->$actionName();
+    $controller->$actionName($request);
 }
 
 
