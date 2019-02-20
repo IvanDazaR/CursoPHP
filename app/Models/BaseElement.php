@@ -8,10 +8,12 @@ class BaseElement implements Printable {
     public $description;
     public $visible = true;
     public $months;
+    public $ruta; //variable para guardar el logo
 
-    public function __construct($title, $description) {
+    public function __construct($title, $description, $ruta) {
         $this->setTitle($title);
         $this->description = $description;
+        $this->logo = $ruta;
     }
 
     public function setTitle($t) {
