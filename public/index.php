@@ -58,6 +58,23 @@ $map->post('saveProjects', '/cursoPHP/projects/add', [
     'controller' => 'App\Controllers\ProjectsController',
     'action' => 'getAddProjectAction'
 ]);
+$map->get('addUsers', '/cursoPHP/users/add', [
+    'controller' =>'App\Controllers\UsersController',
+    'action' => 'getAddUserAction'
+]);
+$map->post('saveUsers', '/cursoPHP/users/add', [
+    'controller' =>'App\Controllers\UsersController',
+    'action' => 'getAddUserAction'
+]);
+$map->get('loginForm', '/cursoPHP/login', [
+    'controller' =>'App\Controllers\AuthController',
+    'action' => 'getLogin'
+]);
+$map->post('auth', '/cursoPHP/auth', [
+    'controller' =>'App\Controllers\AuthController',
+    'action' => 'postLogin'
+]);
+
 // $map->get('addProjects', '/cursoPHP/projects/add', '../addProject.php');
 $matcher = $routerContainer->getMatcher();
 $route = $matcher->match($request);
