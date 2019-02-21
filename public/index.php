@@ -110,6 +110,14 @@ if (!$route) {
     $controller = new $controllerName;
     $response = $controller->$actionName($request);
 
+    foreach ($response->getheaders() as $name => $values) {
+        # code...
+        foreach ($values as $value) {
+            # code...
+            header(sprintf('%s: %s', $name, $value), false);
+        }
+    }
+    http_response_code($response->getStatusCode());
     echo $response->getBody();
 }
 

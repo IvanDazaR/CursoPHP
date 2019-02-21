@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\User;
 use Respect\Validation\Validator as v;
+use Zend\Diactoros\Response\RedirectResponse;
 
 class AuthController extends BaseController {
     public function getLogin() {
@@ -11,20 +12,22 @@ class AuthController extends BaseController {
     }
     public function postLogin($request){
         $postData = $request->getParsedBody();
+        $responseMessage= null;
         $user = User::where('email', $postData['email'])->first();
         
         if ($user) {
             # code...
             if (password_verify($postData['password'], $user->password)) {
                 # code...
-                echo 'Correct';
+                return new RedirectResponse('/admin');
             } else {
                 # code...
-                echo 'Wrong';
+                $responseMessage= 'Bad credentials';
             }
         } else {
             # code...
-            echo 'Not found';
+            $responseMessage= 'Bad credentials';
         }
+        return $this->renderHTML('login.twig', ['responseMessage'=>$responseMessage]);
     }
 }
