@@ -5,6 +5,8 @@ ini_set('display_starup_error', 1);
 error_reporting(E_ALL);
 
 require_once '../vendor/autoload.php';
+session_start(); // inicializa la sesión 
+
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Aura\Router\RouterContainer;
 
@@ -70,9 +72,18 @@ $map->get('loginForm', '/cursoPHP/login', [
     'controller' =>'App\Controllers\AuthController',
     'action' => 'getLogin'
 ]);
+$map->get('logout', '/cursoPHP/logout', [
+    'controller' =>'App\Controllers\AuthController',
+    'action' => 'getLogout'
+]);
 $map->post('auth', '/cursoPHP/auth', [
     'controller' =>'App\Controllers\AuthController',
     'action' => 'postLogin'
+]);
+$map->get('admin', '/cursoPHP/admin', [
+    'controller' =>'App\Controllers\adminController',
+    'action' => 'getIndex',
+    'auth' => true
 ]);
 
 // $map->get('addProjects', '/cursoPHP/projects/add', '../addProject.php');
@@ -106,6 +117,14 @@ if (!$route) {
     $handlerData = $route->handler;
     $controllerName = $handlerData['controller'];
     $actionName = $handlerData['action'];
+    $needsAuth = $handlerData['auth'] ?? false;
+
+    $sessionUserId = $_SESSION['userId'] ?? null;
+    if ($needsAuth && !$sessionUserId) {
+        # code...
+        echo 'Protected route';
+        die;
+    }
 
     $controller = new $controllerName;
     $response = $controller->$actionName($request);
@@ -121,13 +140,3 @@ if (!$route) {
     echo $response->getBody();
 }
 
-
-// $route = $_GET['route'] ?? '/';
-
-// if ($route == '/') {
-//     # code...
-//     require '../index.php';
-// } elseif ($route == 'addJob') {
-//     # code...
-//     require '../addJob.php';
-// }
