@@ -35,4 +35,9 @@ class AuthController extends BaseController {
         unset($_SESSION['userId']);
         return new RedirectResponse('login');
     }
+    public function getLoginRequired() {
+         return new RedirectResponse('/cursoPHP/login');
+        //  $responseMessage= 'Protected route';
+          
+   	}
 }

@@ -45,7 +45,8 @@ $map->get('index', '/cursoPHP/', [
 ]);
 $map->get('addJobs', '/cursoPHP/jobs/add', [
     'controller' => 'App\Controllers\JobsController',
-    'action' => 'getAddJobAction'
+    'action' => 'getAddJobAction',
+    'auth' => true
 ]);
 $map->post('saveJobs', '/cursoPHP/jobs/add', [
     'controller' => 'App\Controllers\JobsController',
@@ -54,7 +55,8 @@ $map->post('saveJobs', '/cursoPHP/jobs/add', [
 
 $map->get('addProjects', '/cursoPHP/projects/add', [
     'controller' => 'App\Controllers\ProjectsController',
-    'action' => 'getAddProjectAction'
+    'action' => 'getAddProjectAction',
+    'auth' => true
 ]);
 $map->post('saveProjects', '/cursoPHP/projects/add', [
     'controller' => 'App\Controllers\ProjectsController',
@@ -62,7 +64,8 @@ $map->post('saveProjects', '/cursoPHP/projects/add', [
 ]);
 $map->get('addUsers', '/cursoPHP/users/add', [
     'controller' =>'App\Controllers\UsersController',
-    'action' => 'getAddUserAction'
+    'action' => 'getAddUserAction',
+    'auth' => true
 ]);
 $map->post('saveUsers', '/cursoPHP/users/add', [
     'controller' =>'App\Controllers\UsersController',
@@ -122,10 +125,11 @@ if (!$route) {
     $sessionUserId = $_SESSION['userId'] ?? null;
     if ($needsAuth && !$sessionUserId) {
         # code...
-        echo 'Protected route';
-        die;
+        // echo 'Protected route';
+        $controllerName = 'App\Controllers\AuthController';
+        $actionName = 'getLoginRequired';
     }
-
+    
     $controller = new $controllerName;
     $response = $controller->$actionName($request);
 
